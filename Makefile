@@ -12,11 +12,9 @@ linux_pip = /usr/local/bin/pip3
 
 init :
 ifeq ($(OS), darwin)
-	# pip uninstall -y rsyslog_cee
 	pip install -r requirements.txt
 endif
 ifeq ($(OS), linux)
-	# $(linux_pip) uninstall -y rsyslog_cee
 	$(linux_pip) install -r requirements.txt --user
 endif
 
@@ -47,13 +45,13 @@ ifeq ($(OS), linux)
 	$(linux_python) setup.py sdist bdist_wheel
 endif
 
-# clean :
-# ifeq ($(OS), darwin)
-# 	rm -rf /Users/messel/.pyenv/versions/3.7.2/lib/python3.7/site-packages/*
-# endif
-# ifeq  ($(OS), linux)
-# 	rm  -rf /home/ubuntu/.local/lib/python3.6/site-packages/*
-# endif
+clean :
+ifeq ($(OS), darwin)
+	rm -rf /Users/messel/.pyenv/versions/3.7.2/lib/python3.7/site-packages/photo_3d*
+endif
+ifeq  ($(OS), linux)
+	rm  -rf /home/ubuntu/.local/lib/python3.6/site-packages/photo_3d*
+endif
 
 # start: dependencies
 # 	sudo service  restart

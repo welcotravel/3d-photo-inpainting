@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 setup(
-  name='3d_photo_inpainting',
+  name='photo_3d',
   version='0.1.0',
   description='3d photo inpainting',
   url='https://github.com/welcome/3d-photo-inpainting',

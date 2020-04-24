@@ -1,9 +1,0 @@
-README.md
-setup.cfg
-setup.py
-3d_photo_inpainting.egg-info/PKG-INFO
-3d_photo_inpainting.egg-info/SOURCES.txt
-3d_photo_inpainting.egg-info/dependency_links.txt
-3d_photo_inpainting.egg-info/not-zip-safe
-3d_photo_inpainting.egg-info/requires.txt
-3d_photo_inpainting.egg-info/top_level.txt

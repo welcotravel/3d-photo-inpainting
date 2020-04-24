@@ -1,0 +1,9 @@
+README.md
+setup.cfg
+setup.py
+photo_3d.egg-info/PKG-INFO
+photo_3d.egg-info/SOURCES.txt
+photo_3d.egg-info/dependency_links.txt
+photo_3d.egg-info/not-zip-safe
+photo_3d.egg-info/requires.txt
+photo_3d.egg-info/top_level.txt
