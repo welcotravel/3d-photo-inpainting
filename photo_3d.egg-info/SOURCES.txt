@@ -1,6 +1,12 @@
 README.md
 setup.cfg
 setup.py
+photo_3d/__init__.py
+photo_3d/main.py
+photo_3d/mesh.py
+photo_3d/mesh_tools.py
+photo_3d/networks.py
+photo_3d/utils.py
 photo_3d.egg-info/PKG-INFO
 photo_3d.egg-info/SOURCES.txt
 photo_3d.egg-info/dependency_links.txt
