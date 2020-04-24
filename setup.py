@@ -19,6 +19,7 @@ setup(
     'transforms3d==0.3.1',
     'networkx==2.3',
     'matplotlib',
+    'absl-py==0.9.0',
     'asyncio',
     'aiohttp',
     'aiofiles',
