@@ -23,7 +23,7 @@ from MiDaS.run import run_depth
 from MiDaS.monodepth_net import MonoDepthNet
 import MiDaS.MiDaS_utils as MiDaS_utils
 
-def run():
+def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('--config', type=str, default='argument.yml',help='Configure of post processing')
   args = parser.parse_args()
