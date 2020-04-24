@@ -1,0 +1,17 @@
+.DS_Store
+model
+*.pyc
+__pycache__
+*.db
+build/
+dist
+data/
+checkpoints/
+image/
+bak_image/
+MiDas/model.pt
+depth/*.npy
+mesh/
+video/*
+*.pth
+*.pt
