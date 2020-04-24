@@ -23,7 +23,7 @@ from MiDaS.run import run_depth
 from MiDaS.monodepth_net import MonoDepthNet
 import MiDaS.MiDaS_utils as MiDaS_utils
 
-def main():
+def create_3d_video():
   parser = argparse.ArgumentParser()
   parser.add_argument('--config', type=str, default='argument.yml',help='Configure of post processing')
   args = parser.parse_args()
@@ -121,4 +121,4 @@ def main():
                           mean_loc_depth=mean_loc_depth)
 
 if __name__ == "__main__":
-  absl_app.run(main)
+  absl_app.run(create_3d_video)
