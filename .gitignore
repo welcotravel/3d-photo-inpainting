@@ -14,5 +14,6 @@ depth/*.npy
 test/depth/*.npy
 mesh/
 video/*
+test/video/*
 *.pth
 *.pt
