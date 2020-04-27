@@ -22,6 +22,7 @@ import copy
 import torch
 import os
 from . import utils
+from .utils import get_device
 from .utils import refine_depth_around_edge, smooth_cntsyn_gap
 from .utils import require_depth_edge, filter_irrelevant_edge_new, open_small_mask
 from skimage.feature import canny
@@ -182,11 +183,7 @@ def extrapolate(global_mesh,
     input_other_edge_with_id = other_edge_with_id[all_anchor[0]:all_anchor[1], all_anchor[2]:all_anchor[3]]
     end_depth_maps = ((valid_line * input_edge_map) > 0) * input_depth
 
-
-    if isinstance(config["gpu_ids"], int) and (config["gpu_ids"] >= 0):
-        device = config["gpu_ids"]
-    else:
-        device = "cpu"
+    device = get_device(config)
 
     valid_edge_ids = sorted(list(input_other_edge_with_id[(valid_line * input_edge_map) > 0]))
     valid_edge_ids = valid_edge_ids[1:] if (len(valid_edge_ids) > 0 and valid_edge_ids[0] == -1) else valid_edge_ids
@@ -726,7 +723,7 @@ def edge_inpainting(edge_id, context_cc, erode_context_cc, mask_cc, edge_cc, ext
     tensor_edge_dict = convert2tensor(patch_edge_dict)
     if require_depth_edge(patch_edge_dict['edge'], patch_edge_dict['mask']) and inpaint_iter == 0:
         with torch.no_grad():
-            device = config["gpu_ids"] if isinstance(config["gpu_ids"], int) and config["gpu_ids"] >= 0 else "cpu"
+            device = get_device(config)
             depth_edge_output = depth_edge_model.forward_3P(tensor_edge_dict['mask'],
                                                             tensor_edge_dict['context'],
                                                             tensor_edge_dict['rgb'],
@@ -761,7 +758,7 @@ def depth_inpainting(context_cc, extend_context_cc, erode_context_cc, mask_cc, m
     tensor_depth_dict = convert2tensor(patch_depth_dict)
     resize_mask = open_small_mask(tensor_depth_dict['mask'], tensor_depth_dict['context'], 3, 41)
     with torch.no_grad():
-        device = config["gpu_ids"] if isinstance(config["gpu_ids"], int) and config["gpu_ids"] >= 0 else "cpu"
+        device = get_device(config)
         depth_output = depth_feat_model.forward_3P(resize_mask,
                                                     tensor_depth_dict['context'],
                                                     tensor_depth_dict['zero_mean_depth'],

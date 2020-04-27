@@ -17,6 +17,7 @@ import copy
 import torch
 import os
 from . import utils
+from .utils import get_device
 from .utils import path_planning, open_small_mask, sparse_bilateral_filtering, clean_far_edge, refine_depth_around_edge
 from .utils import refine_color_around_edge, filter_irrelevant_edge_new, require_depth_edge, clean_far_edge_new
 from .utils import create_placeholder, refresh_node, find_largest_rect
@@ -1395,10 +1396,7 @@ def DL_inpaint_edge(mesh,
                     specific_edge_loc=None,
                     inpaint_iter=0):
 
-    if isinstance(config["gpu_ids"], int) and (config["gpu_ids"] >= 0):
-        device = config["gpu_ids"]
-    else:
-        device = "cpu"
+    device = get_device(config)
 
     edge_map = np.zeros_like(depth)
     new_edge_ccs = [set() for _ in range(len(edge_ccs))]

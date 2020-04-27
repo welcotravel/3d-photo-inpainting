@@ -11,6 +11,7 @@ image/
 bak_image/
 MiDas/model.pt
 depth/*.npy
+test/depth/*.npy
 mesh/
 video/*
 *.pth

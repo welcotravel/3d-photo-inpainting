@@ -23,6 +23,14 @@ import time
 from scipy.interpolate import interp1d
 from collections import namedtuple
 
+def get_device(config):
+  device = 'cpu'
+  if torch.cuda.is_available() and isinstance(config['gpu_ids'], int) and (config['gpu_ids'] >= 0):
+    device = config['gpu_ids']
+  else:
+    device = 'cpu'
+  return device
+
 def path_planning(num_frames, x, y, z, path_type=''):
     if path_type == 'straight-line':
         corner_points = np.array([[0, 0, 0], [(0 + x) * 0.5, (0 + y) * 0.5, (0 + z) * 0.5], [x, y, z]])
