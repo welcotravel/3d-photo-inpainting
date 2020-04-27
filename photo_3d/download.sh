@@ -1,11 +1,11 @@
 #!/bin/sh
-mkdir checkpoints
+mkdir -p /tmp/3d/checkpoints
 wget https://s3.amazonaws.com/dev.welco.me/3d/model/color-model.pth
-mv color-model.pth checkpoints/.
+mv color-model.pth /tmp/3d/checkpoints/.
 wget https://s3.amazonaws.com/dev.welco.me/3d/model/depth-model.pth
-mv depth-model.pth checkpoints/.
+mv depth-model.pth /tmp/3d/checkpoints/.
 wget https://s3.amazonaws.com/dev.welco.me/3d/model/edge-model.pth
-mv edge-model.pth checkpoints/.
+mv edge-model.pth /tmp/3d/checkpoints/.
 wget https://s3.amazonaws.com/dev.welco.me/3d/model/model.pt
-mkdir MidaS
-mv model.pt MiDaS/.
+mkdir -p /tmp/3d/MidaS
+mv model.pt /tmp/3d/MiDaS/.
