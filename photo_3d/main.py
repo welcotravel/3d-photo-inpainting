@@ -29,10 +29,17 @@ from .MiDaS import MiDaS_utils
 dirname = os.path.dirname(__file__)
 CONFIG_PATH = os.path.join(dirname, 'argument.yml')
 config = yaml.load(open(CONFIG_PATH, 'r'))
+# download model
 config['depth_edge_model_ckpt'] = os.path.join(dirname, config['depth_edge_model_ckpt'])
 config['depth_feat_model_ckpt'] = os.path.join(dirname, config['depth_feat_model_ckpt'])
-config['rgb_feat_model_ckpt'] = os.path.join(dirname, config['rgb_feat_model_ckpt'])
-config['MiDaS_model_ckpt'] = os.path.join(dirname, config['MiDaS_model_ckpt'])
+config['rgb_feat_model_ckpt']   = os.path.join(dirname, config['rgb_feat_model_ckpt'])
+config['MiDaS_model_ckpt']      = os.path.join(dirname, config['MiDaS_model_ckpt'])
+edge_exists  = os.path.exists(config['depth_edge_model_ckpt'])
+feat_exists  = os.path.exists(config['depth_feat_model_ckpt'])
+rgb_exists   = os.path.exists(config['rgb_feat_model_ckpt'])
+midas_exists = os.path.exists(config['MiDaS_model_ckpt'])
+if not (edge_exists and feat_exists and rgb_exists and midas_exists):
+  os.system(os.path.join(dirname,'download.sh'))
 
 def create_3d_video(input_path=None,x_shift_range=[],y_shift_range=[],z_shift_range=[],traj_types=[],video_postfix=[]):
   parser = argparse.ArgumentParser()
