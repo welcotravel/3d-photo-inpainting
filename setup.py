@@ -26,6 +26,6 @@ setup(
     'networkx==2.3',
     'scikit-image'
   ],
-  # package_data={'3d_photo_inpainting': ['bin/*.json']},
+  package_data={'3d_photo_inpainting': ['argument.yml']},
   zip_safe=False
 )

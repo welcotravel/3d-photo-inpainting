@@ -12,26 +12,63 @@ from tqdm import tqdm
 import yaml
 import sys
 from . import mesh
-from mesh import write_ply, read_ply, output_3d_photo
+from .mesh import write_ply, read_ply, output_3d_photo
 from . import utils
-from utils import get_MiDaS_samples, read_MiDaS_depth, sparse_bilateral_filtering
+from .utils import get_MiDaS_samples, read_MiDaS_depth, sparse_bilateral_filtering
 import torch
 import cv2
 from skimage.transform import resize
 import imageio
 import copy
-from networks import Inpaint_Color_Net, Inpaint_Depth_Net, Inpaint_Edge_Net
+from .networks import Inpaint_Color_Net, Inpaint_Depth_Net, Inpaint_Edge_Net
 from .MiDaS.run import run_depth
 from .MiDaS.monodepth_net import MonoDepthNet
 from .MiDaS import MiDaS_utils
 
-def create_3d_video():
+# load default config and update rel paths to files downloaded 
+dirname = os.path.dirname(__file__)
+CONFIG_PATH = os.path.join(dirname, 'argument.yml')
+config = yaml.load(open(CONFIG_PATH, 'r'))
+config['depth_edge_model_ckpt'] = os.path.join(dirname, config['depth_edge_model_ckpt'])
+config['depth_feat_model_ckpt'] = os.path.join(dirname, config['depth_feat_model_ckpt'])
+config['rgb_feat_model_ckpt'] = os.path.join(dirname, config['rgb_feat_model_ckpt'])
+config['MiDaS_model_ckpt'] = os.path.join(dirname, config['MiDaS_model_ckpt'])
+
+def create_3d_video(input_path=None,x_shift_range=[],y_shift_range=[],z_shift_range=[],traj_types=[],video_postfix=[]):
   parser = argparse.ArgumentParser()
-  parser.add_argument('--config', type=str, default='argument.yml',help='Configure of post processing')
+  parser.add_argument('--config', type=str, default=None,help='Configure of post processing')
   args = parser.parse_args()
-  config = yaml.load(open(args.config, 'r'))
+  global config
+  if args.config:    
+    config = yaml.load(open(args.config, 'r'))
+
   if config['offscreen_rendering'] is True:
       vispy.use(app='egl')
+
+  if len(x_shift_range) > 0:
+    config['x_shift_range'] = x_shift_range
+  if len(y_shift_range) > 0:
+    config['y_shift_range'] = y_shift_range
+  if len(z_shift_range) > 0:
+    config['z_shift_range'] = z_shift_range
+  if len(traj_types) > 0:
+    config['traj_types'] = traj_types
+  if len(video_postfix) > 0:
+    config['video_postfix'] = video_postfix  
+  
+  if input_path is not None:
+    config['src_folder'] = input_path
+
+  print('final properties',{
+    'src_folder':    config['src_folder'],
+    'x_shift_range': config['x_shift_range'],
+    'y_shift_range': config['y_shift_range'],
+    'z_shift_range': config['z_shift_range'],
+    'traj_types':    config['traj_types'],
+    'video_postfix': config['video_postfix']
+  })
+
+
   os.makedirs(config['mesh_folder'], exist_ok=True)
   os.makedirs(config['video_folder'], exist_ok=True)
   os.makedirs(config['depth_folder'], exist_ok=True)
