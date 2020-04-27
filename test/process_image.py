@@ -9,10 +9,10 @@ os.system('cp ../photo_3d/image/' + image_base + ' ' + os.path.join(temp_dir,ima
 
 main.create_3d_video(
   input_path=temp_dir,
-  x_shift_range=[0.00],
+  x_shift_range=[-0.02],
   y_shift_range=[0.00],
   z_shift_range=[-0.07],
   traj_types=['double-straight-line'],
-  video_postfix=['zoom-in']
+  video_postfix=['dolly-zoom-in']
 )
 
