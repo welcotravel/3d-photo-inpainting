@@ -2218,7 +2218,12 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
                   img.shape[1]]
     anchor = np.array(anchor) * factor
     plane_width = np.tan(fov_in_rad/2.) * np.abs(mean_loc_depth)
-    for video_pose, video_traj_type in zip(videos_poses, video_traj_types):
+    # for video_pose, video_traj_type in zip(videos_poses, video_traj_types):
+    for ishift, video_traj_type in enumerate(video_traj_types):
+        video_pose = videos_poses[ishift]
+        xshift = config.get('x_shift_range')[ishift]
+        yshift = config.get('y_shift_range')[ishift]
+        zshift = config.get('z_shift_range')[ishift]
         stereos = []
         tops = []; buttoms = []; lefts = []; rights = []
         for tp_id, tp in enumerate(video_pose):
@@ -2276,7 +2281,8 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
         clip = ImageSequenceClip(stereos, fps=config['fps'])
         if isinstance(video_basename, list):
             video_basename = video_basename[0]
-        clip.write_videofile(os.path.join(output_dir, video_basename + '_' + video_traj_type + '.mp4'), fps=config['fps'])
+        output_name = video_basename + '_' + video_traj_type + '_' + xshift + '_' + yshift + '_' + zshift + '.mp4'
+        clip.write_videofile(os.path.join(output_dir, output_name), fps=config['fps'])
 
 
 
