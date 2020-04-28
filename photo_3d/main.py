@@ -42,7 +42,7 @@ midas_exists = os.path.exists(config['MiDaS_model_ckpt'])
 if not (edge_exists and feat_exists and rgb_exists and midas_exists):
   os.system(os.path.join(dirname,'download.sh'))
 
-def create_3d_video(input_path=None,x_shift_range=[],y_shift_range=[],z_shift_range=[],traj_types=[],video_postfix=[]):
+def create_3d_video(fps=None,num_frames=None,input_path=None,x_shift_range=[],y_shift_range=[],z_shift_range=[],traj_types=[],video_postfix=[]):
   parser = argparse.ArgumentParser()
   parser.add_argument('--config', type=str, default=None,help='Configure of post processing')
   args = parser.parse_args()
@@ -64,10 +64,16 @@ def create_3d_video(input_path=None,x_shift_range=[],y_shift_range=[],z_shift_ra
   if len(video_postfix) > 0:
     config['video_postfix'] = video_postfix  
   
+  if fps is not None:
+    config['fps'] = fps
+  if num_frames is not None:
+    config['num_frames'] = num_frames
   if input_path is not None:
     config['src_folder'] = input_path
 
   print('final properties',{
+    'fps':           config['fps'],
+    'num_frames':    config['num_frames'],
     'src_folder':    config['src_folder'],
     'x_shift_range': config['x_shift_range'],
     'y_shift_range': config['y_shift_range'],
