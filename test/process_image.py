@@ -7,7 +7,7 @@ image_base = 'BarcelonaCityGuide.jpg'
 temp_dir = tempfile.mkdtemp()
 os.system('cp ../photo_3d/image/' + image_base + ' ' + os.path.join(temp_dir,image_base))
 
-main.create_3d_video(
+video_files = main.create_3d_video(
   fps=40,
   num_frames=160,
   input_path=temp_dir,
@@ -19,3 +19,4 @@ main.create_3d_video(
   video_postfix=['dolly-zoom-in']
 )
 
+print('video_files',video_files)

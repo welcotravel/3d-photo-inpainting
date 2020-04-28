@@ -2152,7 +2152,7 @@ class Canvas_view():
 def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, video_traj_types, ref_pose,
                     output_dir, ref_image, int_mtx, config, image, videos_poses, video_basename, original_H=None, original_W=None,
                     border=None, depth=None, normal_canvas=None, all_canvas=None, mean_loc_depth=None):
-
+    video_files = []
     cam_mesh = netx.Graph()
     cam_mesh.graph['H'] = Height
     cam_mesh.graph['W'] = Width
@@ -2283,8 +2283,9 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
             video_basename = video_basename[0]
         output_name = '{}_{}_{}_{}_{}.mp4'.format(video_basename,video_traj_type,xshift,yshift,zshift)    
         # output_name = video_basename + '_' + video_traj_type + '_' + str(xshift) + '_' + str(yshift) + '_' + str(zshift) + '.mp4'
+        video_files.append(os.path.join(output_dir, output_name))
         clip.write_videofile(os.path.join(output_dir, output_name), fps=config['fps'])
 
 
 
-    return normal_canvas, all_canvas
+    return normal_canvas, all_canvas, video_files

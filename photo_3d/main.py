@@ -72,6 +72,8 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
     config['src_folder'] = input_path
   if output_path is not None:
     config['video_folder'] = output_path
+    config['depth_folder'] = output_path
+    config['mesh_folder'] = output_path
 
   print('final properties',{
     'fps':           config['fps'],
@@ -94,6 +96,7 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
 
   device = get_device(config)
 
+  all_video_files = []
   for idx in tqdm(range(len(sample_list))):
       depth = None
       sample = sample_list[idx]
@@ -167,11 +170,13 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
       left = (config.get('original_w') // 2 - sample['int_mtx'][0, 2] * config['output_w'])
       down, right = top + config['output_h'], left + config['output_w']
       border = [int(xx) for xx in [top, down, left, right]]
-      normal_canvas, all_canvas = output_3d_photo(verts.copy(), colors.copy(), faces.copy(), copy.deepcopy(Height), copy.deepcopy(Width), copy.deepcopy(hFov), copy.deepcopy(vFov),
+      normal_canvas, all_canvas, video_files = output_3d_photo(verts.copy(), colors.copy(), faces.copy(), copy.deepcopy(Height), copy.deepcopy(Width), copy.deepcopy(hFov), copy.deepcopy(vFov),
                           copy.deepcopy(sample['tgt_pose']), sample['video_postfix'], copy.deepcopy(sample['ref_pose']), copy.deepcopy(config['video_folder']),
                           image.copy(), copy.deepcopy(sample['int_mtx']), config, image,
                           videos_poses, video_basename, config.get('original_h'), config.get('original_w'), border=border, depth=depth, normal_canvas=normal_canvas, all_canvas=all_canvas,
                           mean_loc_depth=mean_loc_depth)
+      all_video_files = all_video_files + video_files
+  return all_video_files    
 
 if __name__ == "__main__":
   absl_app.run(create_3d_video)
