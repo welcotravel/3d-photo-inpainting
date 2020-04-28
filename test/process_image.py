@@ -11,7 +11,7 @@ main.create_3d_video(
   fps=40,
   num_frames=160,
   input_path=temp_dir,
-  output_path='./'
+  output_path='./',
   x_shift_range=[-0.02],
   y_shift_range=[0.00],
   z_shift_range=[-0.07],
