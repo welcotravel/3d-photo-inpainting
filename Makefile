@@ -45,6 +45,13 @@ ifeq ($(OS), linux)
 	$(linux_python) setup.py sdist bdist_wheel
 endif
 
+deploy_dev: package
+	gsutil cp dist/photo_3d*.tar.gz gs://welcome_dev/code
+
+deploy_prod: package
+	gsutil cp dist/photo_3d*.tar.gz gs://welcome_prod/code
+
+
 clean :
 ifeq ($(OS), darwin)
 	rm -rf /Users/messel/.pyenv/versions/3.7.2/lib/python3.7/site-packages/photo_3d*

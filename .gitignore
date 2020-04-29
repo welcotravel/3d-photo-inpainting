@@ -12,6 +12,7 @@ bak_image/
 MiDas/model.pt
 depth/*.npy
 test/depth/*.npy
+test/*.mp4
 mesh/
 video/*
 test/video/*
