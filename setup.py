@@ -26,6 +26,6 @@ setup(
     'networkx==2.3',
     'scikit-image'
   ],
-  package_data={'photo_3d': ['argument.yml']},
+  package_data={'photo_3d': ['argument.yml','download.sh']},
   zip_safe=False
 )
