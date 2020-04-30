@@ -7,5 +7,5 @@ mv depth-model.pth /tmp/3d/checkpoints/.
 wget https://s3.amazonaws.com/dev.welco.me/3d/model/edge-model.pth
 mv edge-model.pth /tmp/3d/checkpoints/.
 wget https://s3.amazonaws.com/dev.welco.me/3d/model/model.pt
-mkdir -p /tmp/3d/MidaS
+mkdir -p /tmp/3d/MiDaS
 mv model.pt /tmp/3d/MiDaS/.
