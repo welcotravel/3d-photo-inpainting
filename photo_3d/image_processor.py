@@ -25,7 +25,7 @@ from .networks import Inpaint_Color_Net, Inpaint_Depth_Net, Inpaint_Edge_Net
 from .MiDaS.run import run_depth
 from .MiDaS.monodepth_net import MonoDepthNet
 from .MiDaS import MiDaS_utils
-from bilateral_filtering import sparse_bilateral_filtering
+from .bilateral_filtering import sparse_bilateral_filtering
 
 # load default config and update rel paths to files downloaded 
 dirname = os.path.dirname(__file__)

@@ -12,5 +12,6 @@ asyncio
 aiohttp
 aiofiles
 networkx==2.3
+Cython==3.0a3
 cynetworkx
 scikit-image

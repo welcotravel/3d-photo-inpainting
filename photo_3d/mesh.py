@@ -18,7 +18,7 @@ import torch
 import os
 from . import utils
 from .utils import get_device
-from .utils import path_planning, open_small_mask, sparse_bilateral_filtering, clean_far_edge, refine_depth_around_edge
+from .utils import path_planning, open_small_mask, clean_far_edge, refine_depth_around_edge
 from .utils import refine_color_around_edge, filter_irrelevant_edge_new, require_depth_edge, clean_far_edge_new
 from .utils import create_placeholder, refresh_node, find_largest_rect
 from . import mesh_tools
@@ -27,6 +27,7 @@ from .mesh_tools import refresh_bord_depth, enlarge_border, fill_dummy_bord, ext
 import transforms3d
 import random
 from functools import reduce
+from .bilateral_filtering import sparse_bilateral_filtering
 
 def create_mesh(depth, image, int_mtx, config):
     H, W, C = image.shape

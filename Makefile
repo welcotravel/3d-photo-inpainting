@@ -1,6 +1,6 @@
 .PHONY : githook all os init dev_dependencies dependencies start watch clean
 
-dev: init
+dev: init dev_dependencies
 
 githook: init dependencies
 

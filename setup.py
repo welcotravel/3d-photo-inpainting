@@ -24,7 +24,9 @@ setup(
     'aiohttp',
     'aiofiles',
     'networkx==2.3',
-    'scikit-image'
+    'scikit-image',
+    'Cython==3.0a3',
+    'cynetworkx'
   ],
   package_data={'photo_3d': ['argument.yml','download.sh']},
   zip_safe=False
