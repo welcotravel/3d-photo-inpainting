@@ -75,6 +75,7 @@ argument.yml
     - Action to load existed mesh (.ply) file
 - `save_ply: True`
     - Action to store the output mesh (.ply) file
+    - Disable this option `save_ply: False` to reduce the computational time.
 - `inference_video: True`
     - Action to rendered the output video
 - `gpu_ids: 0`
@@ -129,3 +130,6 @@ argument.yml
       could help you prolong the inpainted depth edge. 
 - `crop_border: [0.03, 0.03, 0.05, 0.03]`
     - The fraction of pixels to crop out around the borders `[top, left, bottom, right]`.
+- `anti_flickering: True`
+    - Action to avoid flickering effect in the output video. 
+    - This may result in longer computational time in rendering phase.
