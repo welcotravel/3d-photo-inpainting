@@ -26,6 +26,7 @@ setup(
     'networkx==2.3',
     'scikit-image',
     'Cython==3.0a3',
+    'decorator==4.4.2',
     'cynetworkx'
   ],
   package_data={'photo_3d': ['argument.yml','download.sh']},
