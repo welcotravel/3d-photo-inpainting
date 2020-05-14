@@ -13,4 +13,5 @@ aiofiles
 networkx==2.3
 scikit-image
 Cython==3.0a3
+decorator==4.4.2
 cynetworkx
