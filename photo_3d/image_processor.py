@@ -108,7 +108,7 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
 
     print(f"Running depth extraction at {time.time()}")
 
-    run_depth([sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
+    run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
               config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=640)
     config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
     frac = config['longer_side_len'] / max(config['output_h'], config['output_w'])
