@@ -111,8 +111,9 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
     run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
               config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=640)
     config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
-    frac = config['longer_side_len'] / max(config['output_h'], config['output_w'])
-    config['output_h'], config['output_w'] = int(config['output_h'] * frac), int(config['output_w'] * frac)
+    # frac = config['longer_side_len'] / max(config['output_h'], config['output_w'])
+    # config['output_h'], config['output_w'] = int(config['output_h'] * frac), int(config['output_w'] * frac)
+    frac = 1
     config['original_h'], config['original_w'] = config['output_h'], config['output_w']
     if image.ndim == 2:
       image = image[..., None].repeat(3, -1)
