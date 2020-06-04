@@ -7,7 +7,6 @@ photo_3d/argument.yml
 photo_3d/bilateral_filtering.py
 photo_3d/download.sh
 photo_3d/image_processor.py
-photo_3d/main.py
 photo_3d/mesh.py
 photo_3d/mesh_tools.py
 photo_3d/networks.py
