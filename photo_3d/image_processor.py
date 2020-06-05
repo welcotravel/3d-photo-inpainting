@@ -108,17 +108,20 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
 
     print(f"Running depth extraction at {time.time()}")
 
-    image_width = image.shape[1]
-    print('image dims',image.shape,'width',image_width)
+    image_h = image.shape[0]
+    image_w = image.shape[1]
+    max_dim = max(image_h,image_w)
+    target_size = min(config['longer_side_len'], max_dim)
+    frac = target_size / max_dim
+    # upper bound on image width
+    target_w = frac * image_w
+    print('image dims',image.shape,'width',image_w,'target_width',target_w)
     run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
-              config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=720)
-    # run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
-    #           config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=image_width)
+              config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=target_w)
     config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
-    # frac = config['longer_side_len'] / max(config['output_h'], config['output_w'])
     # config['output_h'], config['output_w'] = int(config['output_h'] * frac), int(config['output_w'] * frac)
-    frac = 1
-    config['original_h'], config['original_w'] = config['output_h'], config['output_w']
+    # config['original_h'], config['original_w'] = config['output_h'], config['output_w']
+    config['original_h'], config['original_w'] = image_h,image_w
     if image.ndim == 2:
       image = image[..., None].repeat(3, -1)
     if np.sum(np.abs(image[..., 0] - image[..., 1])) == 0 and np.sum(np.abs(image[..., 1] - image[..., 2])) == 0:
