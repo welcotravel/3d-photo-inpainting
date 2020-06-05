@@ -4,8 +4,9 @@ import photo_3d
 from photo_3d import image_processor
 
 image_base = 'BarcelonaCityGuide.jpg'
+# image_base = 'centralPark.jpg'
 temp_dir = tempfile.mkdtemp()
-os.system('cp ../photo_3d/image/' + image_base + ' ' + os.path.join(temp_dir,image_base))
+os.system('cp ' + image_base + ' ' + os.path.join(temp_dir,image_base))
 
 video_files = image_processor.create_3d_video(
   fps=30,
