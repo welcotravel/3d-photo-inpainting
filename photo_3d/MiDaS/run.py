@@ -45,7 +45,6 @@ def run_depth(device_id, img_names, input_path, output_path, model_path, Net, ut
 
         # input
         img = utils.read_image(img_name)
-        w = img.shape[1]
         scale = target_w / max(img.shape[0], img.shape[1])
         target_height, target_width = int(round(img.shape[0] * scale)), int(round(img.shape[1] * scale))
         img_input = utils.resize_image(img)

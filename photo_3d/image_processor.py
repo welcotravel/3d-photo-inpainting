@@ -110,10 +110,10 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
 
     image_width = image.shape[1]
     print('image dims',image.shape,'width',image_width)
-    # run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
-    #           config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=640)
     run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
-              config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=image_width)
+              config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=720)
+    # run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
+    #           config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=image_width)
     config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
     # frac = config['longer_side_len'] / max(config['output_h'], config['output_w'])
     # config['output_h'], config['output_w'] = int(config['output_h'] * frac), int(config['output_w'] * frac)
