@@ -3,8 +3,9 @@ import os
 import photo_3d
 from photo_3d import image_processor
 
-image_base = 'BarcelonaCityGuide.jpg'
+# image_base = 'BarcelonaCityGuide.jpg'
 # image_base = 'centralPark.jpg'
+image_base = 'Upland_Burger.jpg'
 temp_dir = tempfile.mkdtemp()
 os.system('cp ' + image_base + ' ' + os.path.join(temp_dir,image_base))
 

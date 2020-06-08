@@ -47,7 +47,8 @@ if not (edge_exists and feat_exists and rgb_exists and midas_exists):
 def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_shift_range=[],y_shift_range=[],z_shift_range=[],traj_types=[],video_postfix=[]):
   parser = argparse.ArgumentParser()
   parser.add_argument('--config', type=str, default=None,help='Configure of post processing')
-  args = parser.parse_args()
+  # args = parser.parse_args()
+  args, unknown_flags = parser.parse_known_args()
   global config
   if args.config:    
     config = yaml.load(open(args.config, 'r'))
