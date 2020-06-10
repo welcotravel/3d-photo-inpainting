@@ -45,13 +45,13 @@ if not (edge_exists and feat_exists and rgb_exists and midas_exists):
   os.system(os.path.join(dirname,'download.sh'))
 
 def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_shift_range=[],y_shift_range=[],z_shift_range=[],traj_types=[],video_postfix=[]):
-  parser = argparse.ArgumentParser()
-  parser.add_argument('--config', type=str, default=None,help='Configure of post processing')
+  # parser = argparse.ArgumentParser()
+  # parser.add_argument('--config', type=str, default=None,help='Configure of post processing')
   # args = parser.parse_args()
-  args, unknown_flags = parser.parse_known_args()
+  # args, _ = parser.parse_known_args()
   global config
-  if args.config:    
-    config = yaml.load(open(args.config, 'r'))
+  # if args.config:    
+  #   config = yaml.load(open(args.config, 'r'))
 
   if config['offscreen_rendering'] is True:
       vispy.use(app='egl')
@@ -116,13 +116,15 @@ def create_3d_video(fps=None,num_frames=None,input_path=None,output_path=None,x_
     frac = target_size / max_dim
     # upper bound on image width
     target_w = frac * image_w
+    # target_w = 480
     print('image dims',image.shape,'width',image_w,'target_width',target_w)
     run_depth(device,[sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
               config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=target_w)
-    config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
+    config['output_h'], config['output_w'] = int(image_h * frac), int(image_w * frac)
+    # config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
     # config['output_h'], config['output_w'] = int(config['output_h'] * frac), int(config['output_w'] * frac)
-    # config['original_h'], config['original_w'] = config['output_h'], config['output_w']
-    config['original_h'], config['original_w'] = image_h,image_w
+    config['original_h'], config['original_w'] = config['output_h'], config['output_w']
+    # config['original_h'], config['original_w'] = image_h,image_w
     if image.ndim == 2:
       image = image[..., None].repeat(3, -1)
     if np.sum(np.abs(image[..., 0] - image[..., 1])) == 0 and np.sum(np.abs(image[..., 1] - image[..., 2])) == 0:

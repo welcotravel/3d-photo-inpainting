@@ -10,7 +10,7 @@ temp_dir = tempfile.mkdtemp()
 os.system('cp ' + image_base + ' ' + os.path.join(temp_dir,image_base))
 
 video_files = image_processor.create_3d_video(
-  fps=30,
+  fps=60,
   num_frames=180,
   input_path=temp_dir,
   output_path='./',
