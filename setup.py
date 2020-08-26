@@ -11,6 +11,7 @@ setup(
   license='MIT',
   packages=find_packages(),
   install_requires = [
+    'imageio==2.9.*',
     'torch==1.4.0',
     'torchvision==0.5.0',
     'opencv-python==4.2.0.32',
